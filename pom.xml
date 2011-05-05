@@ -65,6 +65,27 @@
 	</profiles>
 
 	<build>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+			</resource>
+		</resources>
+ 
+	
 		<plugins>
 			<!-- The actual maven-gae-plugin. Type "mvn gae:run" to run project, "mvn 
 				gae:update" to upload to GAE. -->
@@ -180,14 +201,12 @@
 			<version>${gae.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!--
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-tools</artifactId>
 			<version>${gae.version}</version>
 			<scope>test</scope>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-testing</artifactId>

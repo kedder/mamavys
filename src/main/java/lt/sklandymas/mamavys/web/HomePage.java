@@ -11,14 +11,13 @@
 
 package lt.sklandymas.mamavys.web;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 
 /** Page is responsible of
  * @author rhansen@kindleit.net
  *
  */
-public class HomePage extends WebPage {
+public class HomePage extends BasePage {
 
   public HomePage() {
     add(new Label("hello", "Hello World"));
