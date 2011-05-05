@@ -1,4 +1,4 @@
-package lt.sklandymas;
+package lt.sklandymas.mamavys.web;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.HttpSessionStore;

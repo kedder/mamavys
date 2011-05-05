@@ -13,26 +13,26 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Key key;
 	
-	private String name;
-	private String surname;
+	private String firstName;
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSurname() {
-		return surname;
-	}
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+	private String lastName;
+	
 	public Key getKey() {
 		return key;
 	}
 	public void setKey(Key key) {
 		this.key = key;
 	}
-	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 }

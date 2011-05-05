@@ -27,11 +27,6 @@
 
 	<repositories>
 		<repository>
-			<!-- This repo contains google app engine jars -->
-			<id>sasaar</id>
-			<url>http://maven.seasar.org/maven2</url>
-		</repository>
-		<repository>
             <id>DataNucleus_Repos2</id>
             <name>DataNucleus Repository</name>
             <url>http://www.datanucleus.org/downloads/maven2</url>
@@ -164,18 +159,17 @@
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-labs</artifactId>
 			<version>${gae.version}</version>
-			<scope>test</scope>
+<!--			<scope>test</scope>-->
 		</dependency>
-
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-stubs</artifactId>
 			<version>${gae.version}</version>
-			<scope>test</scope>
+<!--			<scope>test</scope>-->
 		</dependency>
 		<dependency>
 			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<artifactId>appengine-api</artifactId>
 			<version>${gae.version}</version>
 <!--			<scope>runtime</scope>-->
 		</dependency>
@@ -235,6 +229,39 @@
 			<artifactId>jdo2-api</artifactId>
 			<version>2.3-eb</version>
 		</dependency>		
+		
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>2.2</version>
+			</dependency>
+		
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>3.0.5.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>3.0.5.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>3.0.5.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>3.0.5.RELEASE</version>
+				<scope>test</scope>
+			</dependency>
+
+		
 	</dependencies>
 
 </project>

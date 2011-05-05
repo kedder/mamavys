@@ -19,11 +19,13 @@ fi
 
 GAE_SDK_PATH=$1
 
-mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/user/appengine-api-1.0-sdk-$VERSION.jar -DgroupId=com.google.appengine -DartifactId=appengine-api-1.0-sdk -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
+#mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/user/appengine-api-1.0-sdk-$VERSION.jar -DgroupId=com.google.appengine -DartifactId=appengine-api-1.0-sdk -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
 
-mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/user/appengine-api-labs-$VERSION.jar -DgroupId=com.google.appengine -DartifactId=appengine-api-labs -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
+#mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/user/appengine-api-labs-$VERSION.jar -DgroupId=com.google.appengine -DartifactId=appengine-api-labs -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
 
+mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/impl/appengine-api.jar -DgroupId=com.google.appengine -DartifactId=appengine-api -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
 mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/impl/appengine-api-stubs.jar -DgroupId=com.google.appengine -DartifactId=appengine-api-stubs -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
+mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/impl/appengine-api-labs.jar -DgroupId=com.google.appengine -DartifactId=appengine-api-labs -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
 
 mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/testing/appengine-testing.jar -DgroupId=com.google.appengine -DartifactId=appengine-testing -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
 
