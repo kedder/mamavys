@@ -22,9 +22,6 @@ public class Person implements Serializable {
 	public Key getKey() {
 		return key;
 	}
-	public void setKey(Key key) {
-		this.key = key;
-	}
 	public String getFirstName() {
 		return firstName;
 	}

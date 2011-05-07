@@ -29,7 +29,7 @@ mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/impl/appengine-api-labs.jar -D
 
 mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/testing/appengine-testing.jar -DgroupId=com.google.appengine -DartifactId=appengine-testing -Dversion=$VERSION -DgeneratePom=true -Dpackaging=jar
 
-mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/user/orm/datanucleus-appengine-$DATANUCLEUS_VERSION.jar -DgroupId=com.google.appengine -DartifactId=datanucleus-appengine -Dversion=1.0.7 -DgeneratePom=true -Dpackaging=jar
+mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/user/orm/datanucleus-appengine-$DATANUCLEUS_VERSION.jar -DgroupId=com.google.appengine -DartifactId=datanucleus-appengine -Dversion=$DATANUCLEUS_VERSION -DgeneratePom=true -Dpackaging=jar
 
 mvn install:install-file -Dfile=$GAE_SDK_PATH/lib/user/orm/geronimo-jta_1.1_spec-1.1.1.jar -DgroupId=com.google.appengine -DartifactId=geronimo-jta_1.1_spec -Dversion=1.1.1 -DgeneratePom=true -Dpackaging=jar
 

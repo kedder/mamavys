@@ -16,12 +16,11 @@ public class Aircraft implements Serializable {
 	private Key key;
 
 	private String model;
+	
 	private String regNumber;
+	
 	public Key getKey() {
 		return key;
-	}
-	public void setKey(Key key) {
-		this.key = key;
 	}
 	public String getModel() {
 		return model;

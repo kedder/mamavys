@@ -1,5 +1,6 @@
-package lt.sklandymas.mamavys;
+package lt.sklandymas.mamavys.repository;
 
+import lt.sklandymas.mamavys.IntegratedTest;
 import lt.sklandymas.mamavys.domain.Person;
 import lt.sklandymas.mamavys.repository.PersonRepository;
 
