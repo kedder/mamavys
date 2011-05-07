@@ -4,6 +4,7 @@ import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.HttpSessionStore;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.session.ISessionStore;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 public class GaeWicketApplication extends WebApplication
 {
@@ -16,6 +17,8 @@ public class GaeWicketApplication extends WebApplication
     protected void init() {
       super.init();
       getResourceSettings().setResourcePollFrequency(null);
+
+      addComponentInstantiationListener(new SpringComponentInjector(this));
     }
 
     @Override

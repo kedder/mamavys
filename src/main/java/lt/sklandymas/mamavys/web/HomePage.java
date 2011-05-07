@@ -11,16 +11,19 @@
 
 package lt.sklandymas.mamavys.web;
 
+import lt.sklandymas.mamavys.repository.PersonRepository;
+
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
-/** Page is responsible of
- * @author rhansen@kindleit.net
- *
- */
-public class HomePage extends BasePage {
 
-  public HomePage() {
-    add(new Label("hello", "Hello World2"));
-  }
+public class HomePage extends BasePage {	
+	@SpringBean
+	private PersonRepository personRepository;
+
+	public HomePage() {
+		personRepository.findAll();
+		add(new Label("hello", "Hello World2"));
+	}
 
 }
