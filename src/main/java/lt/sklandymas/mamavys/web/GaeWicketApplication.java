@@ -1,5 +1,7 @@
 package lt.sklandymas.mamavys.web;
 
+import lt.sklandymas.mamavys.web.person.PeoplePage;
+
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.HttpSessionStore;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -19,6 +21,8 @@ public class GaeWicketApplication extends WebApplication
       getResourceSettings().setResourcePollFrequency(null);
 
       addComponentInstantiationListener(new SpringComponentInjector(this));
+      
+      mountBookmarkablePage("/people", PeoplePage.class);
     }
 
     @Override

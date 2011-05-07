@@ -10,31 +10,29 @@ import javax.persistence.Id;
 import com.google.appengine.api.datastore.Key;
 
 @Entity
-public class Person implements Serializable {
+public class Aircraft implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Key key;
-	
-	private String firstName;
-	
-	private String lastName;
-	
+
+	private String model;
+	private String regNumber;
 	public Key getKey() {
 		return key;
 	}
 	public void setKey(Key key) {
 		this.key = key;
 	}
-	public String getFirstName() {
-		return firstName;
+	public String getModel() {
+		return model;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setModel(String model) {
+		this.model = model;
 	}
-	public String getLastName() {
-		return lastName;
+	public String getRegNumber() {
+		return regNumber;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setRegNumber(String regNumber) {
+		this.regNumber = regNumber;
 	}
 }

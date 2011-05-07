@@ -11,18 +11,12 @@
 
 package lt.sklandymas.mamavys.web;
 
-import lt.sklandymas.mamavys.repository.PersonRepository;
-
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 
 
 public class HomePage extends BasePage {	
-	@SpringBean
-	private PersonRepository personRepository;
 
 	public HomePage() {
-		personRepository.findAll();
 		add(new Label("hello", "Hello World2"));
 	}
 
