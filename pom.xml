@@ -113,6 +113,7 @@
 				<artifactId>maven-datanucleus-plugin</artifactId>
 				<version>1.1.4</version>
 				<configuration>
+					<log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
 					<mappingIncludes>**/*.class</mappingIncludes>
 					<verbose>true</verbose>
 					<enhancerName>ASM</enhancerName>
@@ -159,6 +160,12 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+	
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket</artifactId>
