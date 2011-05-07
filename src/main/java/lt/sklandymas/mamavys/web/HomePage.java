@@ -20,7 +20,7 @@ import org.apache.wicket.markup.html.basic.Label;
 public class HomePage extends BasePage {
 
   public HomePage() {
-    add(new Label("hello", "Hello World"));
+    add(new Label("hello", "Hello World2"));
   }
 
 }
