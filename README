@@ -1,0 +1,7 @@
+Mamavys - Flight Log management software
+
+The goal of the project is to simplify management of daily flight logs in our
+gliding club. In addition, the project will provide personal flight logs for
+the pilots.
+
+Software is going to be served using Google AppEngine.
