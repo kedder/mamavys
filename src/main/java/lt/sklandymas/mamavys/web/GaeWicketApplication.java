@@ -1,5 +1,6 @@
 package lt.sklandymas.mamavys.web;
 
+import lt.sklandymas.mamavys.web.daily.FlightDaysPage;
 import lt.sklandymas.mamavys.web.person.PeoplePage;
 
 import org.apache.wicket.Page;
@@ -23,6 +24,7 @@ public class GaeWicketApplication extends WebApplication
       addComponentInstantiationListener(new SpringComponentInjector(this));
       
       mountBookmarkablePage("/people", PeoplePage.class);
+      mountBookmarkablePage("/flightdays", FlightDaysPage.class);
     }
 
     @Override

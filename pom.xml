@@ -176,6 +176,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-datetime</artifactId>
+			<version>1.4.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-spring</artifactId>
 			<version>1.4.10</version>
 		</dependency>
