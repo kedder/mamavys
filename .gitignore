@@ -5,3 +5,4 @@ target
 *.swp
 appengine-sdk
 appengine-generated
+tmp
