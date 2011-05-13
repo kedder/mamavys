@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class FlightDay implements Serializable {
 	@Column(nullable=false)
 	private Date date;
 	
-	@OneToMany(mappedBy="day", cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy="day", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<AircraftFlightDay> aircrafts = new HashSet<AircraftFlightDay>();
 
 	public Date getDate() {

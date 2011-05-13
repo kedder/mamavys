@@ -71,10 +71,10 @@ public class CalendarPage extends BasePage {
 		DataView<FlightDay> daysview = new DataView<FlightDay>(id, provider) {
 			@Override
 			protected void populateItem(Item<FlightDay> item) {
-				Link<Void> link = new Link<Void>("dayLink") {
+				Link<FlightDay> link = new Link<FlightDay>("dayLink", item.getModel()) {
 					@Override
 					public void onClick() {
-						setResponsePage(DayPage.class);
+						setResponsePage(new DayPage(getModelObject()));
 					}
 				};
 				link.add(DateLabel.forShortStyle("date", new PropertyModel<Date>(item.getModel(), "date")));

@@ -8,6 +8,8 @@ import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.appengine.api.datastore.Key;
+
 @Transactional
 public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 	@PersistenceContext
@@ -15,7 +17,7 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 
 	@Override
 	public T save(T entity) {
-		getEntityManager().persist(entity);
+		//getEntityManager().persist(entity);
 		return getEntityManager().merge(entity);
 	}
 	
@@ -26,8 +28,13 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 		Query q = getEntityManager().createQuery(gql);
 		return q.getResultList();
 	}
+	
+	@Override
+	public T getByKey(Key key) {
+		return getEntityManager().find(getEntityClass(), key);
+	}
 
-	public EntityManager getEntityManager() {
+	protected EntityManager getEntityManager() {
 		return entityManager;
 	}
 

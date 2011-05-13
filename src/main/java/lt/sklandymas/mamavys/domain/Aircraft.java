@@ -34,4 +34,8 @@ public class Aircraft implements Serializable {
 	public void setRegNumber(String regNumber) {
 		this.regNumber = regNumber;
 	}
+	
+	public String getDisplayValue() {
+		return String.format("%s (%s)", regNumber, model);
+	}
 }

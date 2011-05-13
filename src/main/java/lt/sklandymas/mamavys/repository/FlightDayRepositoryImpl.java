@@ -8,8 +8,10 @@ import javax.persistence.Query;
 import lt.sklandymas.mamavys.domain.FlightDay;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class FlightDayRepositoryImpl extends GenericRepositoryImpl<FlightDay> implements FlightDayRepository {
 
 	@Override

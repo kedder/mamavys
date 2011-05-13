@@ -31,6 +31,15 @@ public class AircraftFlightDay implements Serializable {
 	@OneToMany(mappedBy="aicraftDay", cascade=CascadeType.ALL)
 	private Set<FlightDayEntry> entries = new HashSet<FlightDayEntry>();
 
+	public AircraftFlightDay() {
+		super();
+	}
+
+	public AircraftFlightDay(Aircraft aircraft) {
+		super();
+		this.aircraftKey = aircraft.getKey();
+	}
+
 	public Key getAircraftKey() {
 		return aircraftKey;
 	}

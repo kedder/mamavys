@@ -3,6 +3,19 @@
 <body>
 	<wicket:extend>
 		<h2>Day</h2>
+		
+		<form wicket:id="newAircraftForm">
+			New aircraft
+			<select wicket:id="aircraft"></select>
+			<input type="submit" wicket:id="register" value="Register" />
+		</form>
+		
+		Aircrafts
+		<div wicket:id="aircraftList">
+			<div>
+				<h3 wicket:id="aircraft"></h3>
+			</div>
+		</div>
 	</wicket:extend>
 </body>
 </html>

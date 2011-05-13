@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lt.sklandymas.mamavys.domain.Aircraft;
+import lt.sklandymas.mamavys.domain.AircraftFlightDay;
 import lt.sklandymas.mamavys.domain.FlightDay;
 import lt.sklandymas.mamavys.repository.FlightDayRepository;
 
@@ -23,6 +25,13 @@ public class FlightDayServiceImpl implements FlightDayService {
 			day = flightDayRepository.save(day);
 		}
 		return day;
+	}
+
+	@Override
+	public FlightDay createLogForAircraft(FlightDay day, Aircraft aircraft) {
+		AircraftFlightDay aircraftDay = new AircraftFlightDay(aircraft);
+		day.getAircrafts().add(aircraftDay);
+		return flightDayRepository.save(day);
 	}
 
 }
