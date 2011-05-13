@@ -13,6 +13,7 @@ import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.extensions.yui.calendar.DateField;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
@@ -20,7 +21,7 @@ import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-public class FlightDaysPage extends BasePage {
+public class CalendarPage extends BasePage {
 	@SpringBean
 	private FlightDayRepository flightDayRepository;
 	
@@ -29,7 +30,7 @@ public class FlightDaysPage extends BasePage {
 	
 	private Date newDayDate = null;
 	
-	public FlightDaysPage(PageParameters parameters) {
+	public CalendarPage(PageParameters parameters) {
 		super(parameters);
 		
 		Form<Void> newDayForm = createNewDayForm("newDayForm");
@@ -50,7 +51,7 @@ public class FlightDaysPage extends BasePage {
 			public void onSubmit() {
 				super.onSubmit();
 				createFlightDay(newDayDate);
-				setResponsePage(FlightDaysPage.class);
+				setResponsePage(CalendarPage.class);
 			}
 		};
 		form.add(createButton);
@@ -60,7 +61,6 @@ public class FlightDaysPage extends BasePage {
 
 	protected void createFlightDay(Date newDayDate) {
 		flightDayService.getOrCreateFlightDay(newDayDate);
-		// TODO: redirect to new day page
 	}
 
 	private DataView<FlightDay> createDaysDataView(String id) {
@@ -71,7 +71,15 @@ public class FlightDaysPage extends BasePage {
 		DataView<FlightDay> daysview = new DataView<FlightDay>(id, provider) {
 			@Override
 			protected void populateItem(Item<FlightDay> item) {
-				item.add(DateLabel.forShortStyle("date", new PropertyModel<Date>(item.getModel(), "date")));
+				Link<Void> link = new Link<Void>("dayLink") {
+					@Override
+					public void onClick() {
+						setResponsePage(DayPage.class);
+					}
+				};
+				link.add(DateLabel.forShortStyle("date", new PropertyModel<Date>(item.getModel(), "date")));
+				
+				item.add(link);
 			}
 		};
 		return daysview;

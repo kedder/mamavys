@@ -1,6 +1,7 @@
 package lt.sklandymas.mamavys.web;
 
-import lt.sklandymas.mamavys.web.daily.FlightDaysPage;
+import lt.sklandymas.mamavys.web.aircraft.AircraftsPage;
+import lt.sklandymas.mamavys.web.daily.CalendarPage;
 import lt.sklandymas.mamavys.web.person.PeoplePage;
 
 import org.apache.wicket.Page;
@@ -9,8 +10,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
-public class GaeWicketApplication extends WebApplication
-{
+public class GaeWicketApplication extends WebApplication {
     @Override
     public Class<? extends Page> getHomePage() {
       return HomePage.class;
@@ -24,7 +24,8 @@ public class GaeWicketApplication extends WebApplication
       addComponentInstantiationListener(new SpringComponentInjector(this));
       
       mountBookmarkablePage("/people", PeoplePage.class);
-      mountBookmarkablePage("/flightdays", FlightDaysPage.class);
+      mountBookmarkablePage("/aircrafts", AircraftsPage.class);
+      mountBookmarkablePage("/calendar", CalendarPage.class);
     }
 
     @Override
