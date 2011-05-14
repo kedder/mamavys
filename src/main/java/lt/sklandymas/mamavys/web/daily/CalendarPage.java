@@ -5,6 +5,7 @@ import java.util.List;
 
 import lt.sklandymas.mamavys.domain.FlightDay;
 import lt.sklandymas.mamavys.repository.FlightDayRepository;
+import lt.sklandymas.mamavys.repository.KeyUtils;
 import lt.sklandymas.mamavys.service.FlightDayService;
 import lt.sklandymas.mamavys.web.BasePage;
 
@@ -13,7 +14,7 @@ import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.extensions.yui.calendar.DateField;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
@@ -71,12 +72,9 @@ public class CalendarPage extends BasePage {
 		DataView<FlightDay> daysview = new DataView<FlightDay>(id, provider) {
 			@Override
 			protected void populateItem(Item<FlightDay> item) {
-				Link<FlightDay> link = new Link<FlightDay>("dayLink", item.getModel()) {
-					@Override
-					public void onClick() {
-						setResponsePage(new DayPage(getModelObject()));
-					}
-				};
+				PageParameters params = new PageParameters();
+				params.put("key", KeyUtils.keyToString(item.getModelObject().getKey()));
+				BookmarkablePageLink<Void> link = new BookmarkablePageLink<Void>("dayLink", DayPage.class, params);
 				link.add(DateLabel.forShortStyle("date", new PropertyModel<Date>(item.getModel(), "date")));
 				
 				item.add(link);

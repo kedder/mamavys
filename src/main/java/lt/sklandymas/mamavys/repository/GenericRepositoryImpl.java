@@ -33,7 +33,12 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 	public T getByKey(Key key) {
 		return getEntityManager().find(getEntityClass(), key);
 	}
-
+	
+	@Override
+	public T getByKey(String keyString) {
+		return getByKey(KeyUtils.stringToKey(keyString));
+	}
+	
 	protected EntityManager getEntityManager() {
 		return entityManager;
 	}

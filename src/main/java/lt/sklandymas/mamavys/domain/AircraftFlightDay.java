@@ -28,7 +28,7 @@ public class AircraftFlightDay implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	private FlightDay day;
 	
-	@OneToMany(mappedBy="aicraftDay", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="aicraftDay", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<FlightDayEntry> entries = new HashSet<FlightDayEntry>();
 
 	public AircraftFlightDay() {

@@ -7,10 +7,14 @@ import lt.sklandymas.mamavys.domain.Aircraft;
 import lt.sklandymas.mamavys.domain.AircraftFlightDay;
 import lt.sklandymas.mamavys.domain.FlightDay;
 import lt.sklandymas.mamavys.repository.AircraftRepository;
+import lt.sklandymas.mamavys.repository.FlightDayRepository;
 import lt.sklandymas.mamavys.service.FlightDayService;
 import lt.sklandymas.mamavys.web.BasePage;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.PageParameters;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
@@ -29,15 +33,19 @@ public class DayPage extends BasePage {
 	private AircraftRepository aircraftRepository;
 	
 	@SpringBean
+	private FlightDayRepository flightDayRepository;
+	
+	@SpringBean
 	private FlightDayService flightDayService;
 
 	private FlightDay day;
 	
 	private Aircraft newAircraft;
 
-	public DayPage(FlightDay day) {
-		this.day = day;
-		
+	public DayPage(PageParameters parameters) {
+		super(parameters);
+		this.day = flightDayRepository.getByKey(parameters.getString("key"));
+
 		Form<Void> form = createNewAircraftForm("newAircraftForm");
 		add(form);
 		
@@ -52,10 +60,9 @@ public class DayPage extends BasePage {
 		DataView<AircraftFlightDay> aircraftList = new DataView<AircraftFlightDay>(id, provider) {
 			@Override
 			protected void populateItem(Item<AircraftFlightDay> item) {
-				AircraftFlightDay aircraftDay = item.getModelObject();
-				Aircraft aircraft = aircraftRepository.getByKey(aircraftDay.getAircraftKey());
-				item.add(new Label("aircraft", aircraft.getDisplayValue()));
+				createAircaftDayView(item);
 			}
+
 		};
 		return aircraftList;
 	}
@@ -85,4 +92,20 @@ public class DayPage extends BasePage {
 	private void registerNewAircraft(Aircraft aircraft) {
 		day = flightDayService.createLogForAircraft(day, newAircraft);
 	}
+
+	private void createAircaftDayView(Item<AircraftFlightDay> container) {
+		AircraftFlightDay aircraftDay = container.getModelObject();
+		Aircraft aircraft = aircraftRepository.getByKey(aircraftDay.getAircraftKey());
+		
+		container.add(new Label("aircraft", aircraft.getDisplayValue()));
+		
+		AjaxLink<AircraftFlightDay> newEntry = new AjaxLink<AircraftFlightDay>("newEntry", container.getModel()) {
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				System.out.println("Registering for " + getModelObject());
+			}
+		};
+		container.add(newEntry);
+	}
+
 }

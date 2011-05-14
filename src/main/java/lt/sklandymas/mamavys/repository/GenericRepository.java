@@ -12,4 +12,6 @@ public interface GenericRepository<T> {
 	List<T> findAll();
 	
 	T getByKey(Key key);
+	
+	T getByKey(String keyString);
 }
