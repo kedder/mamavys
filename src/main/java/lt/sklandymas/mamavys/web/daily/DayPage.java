@@ -6,10 +6,12 @@ import java.util.List;
 import lt.sklandymas.mamavys.domain.Aircraft;
 import lt.sklandymas.mamavys.domain.AircraftFlightDay;
 import lt.sklandymas.mamavys.domain.FlightDay;
+import lt.sklandymas.mamavys.domain.FlightDayEntry;
 import lt.sklandymas.mamavys.repository.AircraftRepository;
 import lt.sklandymas.mamavys.repository.FlightDayRepository;
 import lt.sklandymas.mamavys.service.FlightDayService;
 import lt.sklandymas.mamavys.web.BasePage;
+import lt.sklandymas.mamavys.web.aircraft.AircraftField;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.PageParameters;
@@ -17,13 +19,13 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -46,11 +48,9 @@ public class DayPage extends BasePage {
 		super(parameters);
 		this.day = flightDayRepository.getByKey(parameters.getString("key"));
 
-		Form<Void> form = createNewAircraftForm("newAircraftForm");
-		add(form);
+		add(createNewAircraftForm("newAircraftForm"));
 		
-		Component aircraftList = createAircraftListDataView("aircraftList");
-		add(aircraftList);
+		add(createAircraftListDataView("aircraftList"));
 	}
 
 	private Component createAircraftListDataView(String id) {
@@ -70,18 +70,14 @@ public class DayPage extends BasePage {
 	private Form<Void> createNewAircraftForm(String id) {
 		Form<Void> form = new Form<Void>(id);
 		
-		DropDownChoice<Aircraft> choice = new DropDownChoice<Aircraft>(
-				"aircraft", 
-				new PropertyModel<Aircraft>(this, "newAircraft"), 
-				new ArrayList<Aircraft>(aircraftRepository.findAll()),
-				new ChoiceRenderer<Aircraft>("displayValue", "regNumber"));
-		form.add(choice);
+		form.add(new AircraftField ("aircraft", new PropertyModel<Aircraft>(this, "newAircraft")));
 	
 		Button register = new Button("register") {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
-				registerNewAircraft(newAircraft);				
+				registerNewAircraft(newAircraft);
+				setResponsePage(DayPage.class, getPageParameters());
 			}
 		};
 		form.add(register);
@@ -93,16 +89,28 @@ public class DayPage extends BasePage {
 		day = flightDayService.createLogForAircraft(day, newAircraft);
 	}
 
-	private void createAircaftDayView(Item<AircraftFlightDay> container) {
-		AircraftFlightDay aircraftDay = container.getModelObject();
+	private void createAircaftDayView(final Item<AircraftFlightDay> container) {
+		final AircraftFlightDay aircraftDay = container.getModelObject();
 		Aircraft aircraft = aircraftRepository.getByKey(aircraftDay.getAircraftKey());
 		
 		container.add(new Label("aircraft", aircraft.getDisplayValue()));
+		container.add(new EmptyPanel("logEntryForm").setOutputMarkupId(true));
 		
 		AjaxLink<AircraftFlightDay> newEntry = new AjaxLink<AircraftFlightDay>("newEntry", container.getModel()) {
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				System.out.println("Registering for " + getModelObject());
+				FlightDayEntry entry = new FlightDayEntry();
+				LogEntryForm entryForm = new LogEntryForm("logEntryForm", new Model<FlightDayEntry>(entry)) {
+					@Override
+					void onConfirm(AjaxRequestTarget target, FlightDayEntry entry) {
+						aircraftDay.getEntries().add(entry);
+						flightDayRepository.save(day);
+						setVisible(false);
+						target.addComponent(this);
+					}
+				};
+				container.replace(entryForm);
+				target.addComponent(entryForm);
 			}
 		};
 		container.add(newEntry);
