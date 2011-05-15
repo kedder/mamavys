@@ -3,6 +3,7 @@ package lt.sklandymas.mamavys.repository;
 import java.util.Date;
 
 import lt.sklandymas.mamavys.domain.FlightDay;
+import lt.sklandymas.mamavys.domain.FlightDayEntry;
 
 public interface FlightDayRepository extends GenericRepository<FlightDay> {
 	/**
@@ -12,4 +13,7 @@ public interface FlightDayRepository extends GenericRepository<FlightDay> {
 	 * @return
 	 */
 	FlightDay getFlightDay(Date date);
+	
+	void loadFlightDayEntryReferences(FlightDayEntry entry);
+	
 }

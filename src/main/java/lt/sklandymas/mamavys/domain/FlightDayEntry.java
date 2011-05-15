@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -23,14 +24,23 @@ public class FlightDayEntry implements Serializable {
 
 	private Key pilotKey;
 	
+	@Transient
+	private Person pilot;
+	
 	private Key studentKey;
+	
+	@Transient
+	private Person student;
 	
 	private Date takeoffTime;
 	
 	private Date landingTime;
 	
 	private Key relatedEntryKey;
-
+	
+	@Transient
+	private FlightDayEntry relatedEntry;
+	
 	public AircraftFlightDay getAicraftDay() {
 		return aicraftDay;
 	}
@@ -81,5 +91,38 @@ public class FlightDayEntry implements Serializable {
 
 	public Key getKey() {
 		return key;
+	}
+
+	public Person getPilot() {
+		return pilot;
+	}
+
+	public void setPilot(Person pilot) {
+		this.pilot = pilot;
+		if (pilot != null) {
+			setPilotKey(pilot.getKey());
+		}
+	}
+
+	public Person getStudent() {
+		return student;
+	}
+
+	public void setStudent(Person student) {
+		this.student = student;
+		if (student != null) {
+			setStudentKey(student.getKey());
+		}
+	}
+
+	public FlightDayEntry getRelatedEntry() {
+		return relatedEntry;
+	}
+
+	public void setRelatedEntry(FlightDayEntry relatedEntry) {
+		this.relatedEntry = relatedEntry;
+		if (relatedEntry != null) {
+			setRelatedEntryKey(relatedEntry.getKey());
+		}
 	}
 }
